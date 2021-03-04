@@ -46,7 +46,7 @@
       </v-card>
     </v-col>
 
-    <v-snackbar v-model="show2" timeout=3000 color="#D32F2F" bottom	> 
+    <v-snackbar v-model="show2" timeout="3000" color="#D32F2F" bottom>
       Username or password incorrect
     </v-snackbar>
   </v-row>
@@ -68,13 +68,13 @@ export default {
     login: function () {
       let url = "http://127.0.0.1:5000/api/login";
       let data = { username: this.username, password: this.password };
-      this.axios.post(url, data)
-      .then((res) => {
+      this.axios.post(url, data).then((res) => {
         let success = res.data.message;
         if (success) {
+          this.$store.commit("login", res.data.username);
           this.$router.push({ name: "index" });
-        }else{
-          this.show2=true
+        } else {
+          this.show2 = true;
         }
       });
     },
