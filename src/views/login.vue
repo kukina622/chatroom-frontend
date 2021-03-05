@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     login: function () {
-      let url = "http://127.0.0.1:5000/api/login";
+      let url = "/api/login";
       let data = { username: this.username, password: this.password };
       this.axios.post(url, data).then((res) => {
         let success = res.data.message;

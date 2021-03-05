@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     logout: function () {
-      let url = "http://127.0.0.1:5000/api/logout";
+      let url = "/api/logout";
       this.axios.get(url).then((res) => {
         if (res.data.message) {
           this.$store.commit("logout");

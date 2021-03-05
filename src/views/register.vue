@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     registerAPI: async function () {
-      let url = "http://127.0.0.1:5000/api/register";
+      let url = "/api/register";
       let data = { username: this.username, password: this.password };
       await this.axios
         .post(url, data)
