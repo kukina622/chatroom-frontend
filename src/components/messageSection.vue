@@ -1,19 +1,24 @@
 <template>
-  <v-list class="fill-height">
-    <v-list-item v-for="i in 45" :key="i">
-      <v-row>
-        <v-chip>123 </v-chip>
+  <v-list>
+    <v-list-item v-for="record in records[room]" :key="record['datetime']">
+      <v-row :justify="record['from'] == username ? 'end' : 'start'">
+        <v-chip>{{ record["message"] }}</v-chip>
       </v-row>
     </v-list-item>
   </v-list>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {};
   },
   methods: {},
+  computed: {
+    ...mapState(["is_login", "records", "room", "username"]),
+  },
 };
 </script>
 

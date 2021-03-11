@@ -84,7 +84,7 @@ export default {
       await this.axios
         .post(url, data)
         .then((res) => {
-          let success = res.data.message;
+          let success = res.data.success;
           // console.log(success)
           if (success) {
             this.$router.push({ name: "index" });

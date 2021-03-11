@@ -8,7 +8,9 @@
 
     <template v-else-if="is_login">
       <v-spacer></v-spacer>
-      <h2 class="pr-5 pt-1">{{ username }}</h2>
+      <v-app-bar-title class="pr-5 pt-1">
+        {{ username }}
+      </v-app-bar-title>
       <v-btn class="mr-4" outlined color="#00C853" @click="logout()">
         登出
       </v-btn>
@@ -27,7 +29,7 @@ export default {
     logout: function () {
       let url = "/api/logout";
       this.axios.get(url).then((res) => {
-        if (res.data.message) {
+        if (res.data.success) {
           this.$store.commit("logout");
           this.$router.push({ name: "login" });
         }

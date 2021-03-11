@@ -19,8 +19,6 @@
                 v-model="username"
               ></v-text-field>
             </v-col>
-          </v-row>
-          <v-row justify="center">
             <v-col cols="10">
               <!-- password -->
               <v-text-field
@@ -32,6 +30,7 @@
                 :type="show1 ? 'text' : 'password'"
                 @click:append="show1 = !show1"
                 v-model="password"
+                @keypress.enter="check()"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -40,6 +39,10 @@
           <v-row justify="center">
             <v-col cols="10">
               <v-btn block color="#00C853" @click="check()"> 登入 </v-btn>
+            </v-col>
+            <v-col cols="10">
+              還沒有帳戶嗎?
+              <v-btn block color="#00C853" to="/register"> 註冊 </v-btn>
             </v-col>
           </v-row>
         </v-card-actions>
@@ -65,13 +68,14 @@ export default {
     };
   },
   methods: {
-    login: function () {
+    login: async function () {
       let url = "/api/login";
       let data = { username: this.username, password: this.password };
-      this.axios.post(url, data).then((res) => {
-        let success = res.data.message;
+      await this.axios.post(url, data).then((res) => {
+        let success = res.data.success;
         if (success) {
           this.$store.commit("login", res.data.username);
+          this.$socket.emit("join",{"room":"0"})
           this.$router.push({ name: "index" });
         } else {
           this.show2 = true;
@@ -85,6 +89,7 @@ export default {
         this.login();
       }
     },
+
   },
 };
 </script>
