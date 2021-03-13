@@ -8,7 +8,8 @@ export default new Vuex.Store({
     username: "",
     is_login: false,
     room: "0",
-    records: {}
+    records: {},
+    
   },
   mutations: {
     login: function(state, username) {
@@ -27,11 +28,17 @@ export default new Vuex.Store({
         Vue.set(state.records, room, []);
       }
       state.records[room].push(addData);
+    },
+    initRecords:function(state,chatHistoryDict){
+      state.records=chatHistoryDict
     }
   },
   actions: {
     SOCKET_backMessage: function(context, returnData) {
       context.commit("addRecords", returnData);
+    },
+    SOCKET_initChatroom:function(context,chatHistoryDict){
+      context.commit('initRecords',chatHistoryDict)
     }
   },
   modules: {}

@@ -15,7 +15,7 @@ axios.defaults.withCredentials = true;
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: SocketIO('/'),
+  connection: SocketIO('/',{autoConnect: false}),
   vuex: {
     store,
     actionPrefix: 'SOCKET_',

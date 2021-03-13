@@ -7,11 +7,12 @@
           background-color="#424242"
           class="pt-5"
           v-model="message"
+          @keypress.enter="confirmLogin"
         >
         </v-text-field>
       </v-col>
       <v-col cols="auto">
-        <v-btn color="#00C853" @click="confirmLogin" @keypress.enter="confirmLogin"> 送出 </v-btn>
+        <v-btn color="#00C853" @click="confirmLogin" > 送出 </v-btn>
       </v-col>
     </v-row>
   </v-footer>

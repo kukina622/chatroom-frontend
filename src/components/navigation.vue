@@ -32,6 +32,7 @@ export default {
         if (res.data.success) {
           this.$store.commit("logout");
           this.$router.push({ name: "login" });
+          this.$socket.disconnect();
         }
       });
     },

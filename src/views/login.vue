@@ -75,7 +75,8 @@ export default {
         let success = res.data.success;
         if (success) {
           this.$store.commit("login", res.data.username);
-          this.$socket.emit("join",{"room":"0"})
+          this.$socket.open();
+          this.$socket.emit("initConnect");
           this.$router.push({ name: "index" });
         } else {
           this.show2 = true;
@@ -89,7 +90,6 @@ export default {
         this.login();
       }
     },
-
   },
 };
 </script>
