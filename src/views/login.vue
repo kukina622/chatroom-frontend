@@ -71,12 +71,12 @@ export default {
     login: async function () {
       let url = "/api/login";
       let data = { username: this.username, password: this.password };
-      await this.axios.post(url, data).then((res) => {
+      await this.axios.post(url, data).then(async (res) => {
         let success = res.data.success;
         if (success) {
-          this.$store.commit("login", res.data.username);
           this.$socket.open();
-          this.$socket.emit("initConnect");
+          await this.$socket.emit("initConnect");
+          this.$store.commit("login", res.data.username);
           this.$router.push({ name: "index" });
         } else {
           this.show2 = true;

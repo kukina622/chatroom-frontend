@@ -16,7 +16,7 @@
                 outlined
                 clearable
                 v-model="username"
-                :rules="[rule.required]"
+                :rules="[rule.required,rule.containABC]"
                 :error-messages="is_existed ? 'The username has existed' : ''"
                 @change="is_existed = false"
               ></v-text-field>
@@ -74,6 +74,7 @@ export default {
       rule: {
         required: (value) => !!value || "Required.",
         confirm: () => this.confirmPassword == this.password || "NO match",
+        containABC : (value) =>/[A-Za-z]+/.test(value) || "必須包含字母"
       },
     };
   },
@@ -104,7 +105,8 @@ export default {
         _username !== "" &&
         _password !== "" &&
         _confirmPassword !== "" &&
-        _password === _confirmPassword
+        _password === _confirmPassword &&
+        /[A-Za-z]+/.test(_username)
       ) {
         this.registerAPI();
       }
