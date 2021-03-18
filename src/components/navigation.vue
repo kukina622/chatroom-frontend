@@ -12,6 +12,7 @@
             class="pt-5"
             label="帳號名稱"
             v-model="searchUsername"
+            @keypress.enter="searchUser()"
           ></v-text-field>
         </v-col>
         <v-col cols="auto">

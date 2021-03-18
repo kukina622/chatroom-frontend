@@ -22,6 +22,8 @@ export default new Vuex.Store({
       state.is_login = false;
       state.records = {};
       state.friendInvitations = [];
+      state.friendInvitations=[],
+      state.allrooms=[]
     },
     addRecords: function(state, addData) {
       let room = addData["room"];
@@ -73,6 +75,7 @@ export default new Vuex.Store({
     },
     //接受友邀 雙方都會執行
     SOCKET_backAccept: function(context, roomData) {
+      // 自己是送出者
       if (roomData["from"] == context.getUsername) {
         this.$socket.emit("join", roomData["room_id"]);
       }
